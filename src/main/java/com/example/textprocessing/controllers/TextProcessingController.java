@@ -1,5 +1,6 @@
 package com.example.textprocessing.controllers;
 
+import com.example.textprocessing.services.RegexTextProcessing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,14 +30,23 @@ public class TextProcessingController {
     @FXML
     private TextFlow highlightResultTextFlow;
 
+    RegexTextProcessing regexTextProcessing = new RegexTextProcessing();
+
 
     public void findMatch(ActionEvent event){
         try{
             TextField[] fields = {textTextField, regexTextField};
             this.validateTextFields(fields);
-            //Clear possible previous results
             warningLabel.setText("");
             highlightResultTextFlow.getChildren().clear();
+
+            Matcher matcher = regexTextProcessing.matcher(regexTextField.getText(), textTextField.getText());
+
+            if(matcher.find()) {
+                resultLabel.setText("Match found");
+            }else{
+                resultLabel.setText("No match found");
+            }
 
         }catch(Exception e){
             warningLabel.setText(e.getMessage());
