@@ -32,9 +32,8 @@ public class TextProcessingController {
 
     RegexTextProcessing regexTextProcessing = new RegexTextProcessing();
 
-
-    public void findMatch(ActionEvent event){
-        try{
+    public void findMatch(ActionEvent event) {
+        try {
             TextField[] fields = {textTextField, regexTextField};
             this.validateTextFields(fields);
             warningLabel.setText("");
@@ -42,23 +41,39 @@ public class TextProcessingController {
 
             Matcher matcher = regexTextProcessing.matcher(regexTextField.getText(), textTextField.getText());
 
-            if(matcher.find()) {
+            if (matcher.find()) {
                 resultLabel.setText("Match found");
-            }else{
+            } else {
                 resultLabel.setText("No match found");
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             warningLabel.setText(e.getMessage());
         }
     }
 
-    public void replaceMatch(ActionEvent event){
-        try{
+    public void replaceMatch(ActionEvent event) {
+        try {
             TextField[] fields = {textTextField, regexTextField, repTextField};
             this.validateTextFields(fields);
+            warningLabel.setText("");
+            highlightResultTextFlow.getChildren().clear();
 
-        }catch(Exception e){
+            String originalText = textTextField.getText();
+            String regex = regexTextField.getText();
+            String replacement = repTextField.getText();
+
+            Matcher matcher = regexTextProcessing.matcher(regex, originalText);
+
+            if (matcher.find()) {
+                String replacedText = matcher.replaceAll(replacement);
+                textTextField.setText(replacedText);
+                resultLabel.setText("Replacement successful");
+            } else {
+                resultLabel.setText("No match found to replace");
+            }
+
+        } catch (Exception e) {
             warningLabel.setText(e.getMessage());
         }
     }
@@ -74,11 +89,9 @@ public class TextProcessingController {
         }
     }
 
-
-
     public void validateTextFields(TextField[] fields) throws Exception {
-        for(TextField field: fields){
-            if(field.getText().isEmpty()){
+        for (TextField field : fields) {
+            if (field.getText().isEmpty()) {
                 highlightResultTextFlow.getChildren().clear();
                 resultLabel.setText("");
                 warningLabel.setText(field.getPromptText() + " is required");
