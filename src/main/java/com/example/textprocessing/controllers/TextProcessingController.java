@@ -5,11 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TextProcessingController {
     @FXML
@@ -67,8 +65,7 @@ public class TextProcessingController {
 
             if (matcher.find()) {
                 String replacedText = matcher.replaceAll(replacement);
-                textTextField.setText(replacedText);
-                resultLabel.setText("Replacement successful");
+                resultLabel.setText( replacedText);
             } else {
                 resultLabel.setText("No match found to replace");
             }
