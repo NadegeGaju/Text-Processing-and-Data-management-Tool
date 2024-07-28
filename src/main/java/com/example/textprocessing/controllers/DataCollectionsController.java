@@ -1,7 +1,7 @@
 package com.example.textprocessing.controllers;
 
-import com.example.textprocessing.services.DataCollection;
-import com.example.textprocessing.services.FilesHelper;
+import com.example.textprocessing.DataCollection;
+import com.example.textprocessing.FilesHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -85,7 +85,7 @@ public class DataCollectionsController implements Initializable {
     }
     public void addItem(ActionEvent event) throws IOException{
         TextField[] fields = {itemTextField};
-        // check for required fields to add data into our collection
+
         if(!this.validateFields(fields)){
             return;
         };

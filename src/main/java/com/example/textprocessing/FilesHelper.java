@@ -1,4 +1,4 @@
-package com.example.textprocessing.services;
+package com.example.textprocessing;
 
 import java.io.*;
 
