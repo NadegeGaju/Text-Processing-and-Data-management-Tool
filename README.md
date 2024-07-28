@@ -55,3 +55,5 @@ The Text Processing and Data Management Tool is designed to facilitate various t
 2. Navigate to the project directory: `cd text-processing-tool`
 3. Build the project: `mvn clean install`
 4. Run the application: `java -jar target/text-processing-tool.jar`
+   
+## **Loom Link:** https://www.loom.com/share/107cd79dce2b4926bb073d84bf703182
