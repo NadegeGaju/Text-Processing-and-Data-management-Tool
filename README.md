@@ -1,11 +1,11 @@
-Text Processing and Data Management Tool Documentation
-Project Overview
+# **Text Processing and Data Management Tool Documentation**
+## **Project Overview**
 The Text Processing and Data Management Tool is designed to facilitate various text manipulation operations, including search, replace, and data management using Java collections. The project emphasizes collaboration within a Scrum team, adhering to Git and GitHub workflows, and maintaining high standards of code quality and documentation.
-Technologies Used
+## **Technologies Used**
 •	Java JDK 21
 •	Maven
 •	JavaFX
-Project Objectives
+## **Project Objectives**
 •	Implement Scrum processes within the project workflow.
 •	Integrate Git and GitHub workflows using Gitflow branching strategy.
 •	Facilitate effective collaboration and communication among team members.
@@ -16,7 +16,7 @@ Project Objectives
 •	Create user interfaces using JavaFX for interaction with the text processing tool.
 •	Testing
 
-Implementation
+## **Implementation**
 1.	Scrum Implementation
 o	Sprint Planning: Follow sprint goals and allocate tasks.
 o	Daily Standups: Conduct standup meetings every 2 hours of work.
@@ -30,7 +30,7 @@ o	Communication Channels: Utilize Slack for team communication and Jira for proj
 4.	Proper Commit Messages
 o	Commit Messages: Follow guidelines for writing clear and informative commit messages.
 
-Features
+## **Features**
 1.	Regular Expressions (Regex) Module
 o	Functionality: Search, match, and replace text using regular expressions.
 o	Interface: User-friendly interface for inputting regex patterns and text data.
@@ -47,7 +47,7 @@ o	Framework: Develop a user interface using JavaFX.
 o	Interaction: Options for inputting text data, regex patterns, and performing operations.
 o	Results: Display results of regex operations and collection manipulations
 
-Getting Started
+## **Getting Started**
 Clone the repository: git clone "https://github.com/NadegeGaju/Text-Processing-and-Data-management-Tool.git"
 Navigate to the project directory: cd text-processing-tool
 Build the project: mvn clean install
