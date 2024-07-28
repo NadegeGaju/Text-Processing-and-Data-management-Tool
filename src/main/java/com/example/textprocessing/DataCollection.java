@@ -1,4 +1,4 @@
-package com.example.textprocessing.services;
+package com.example.textprocessing;
 
 import java.io.IOException;
 import java.util.*;
@@ -76,6 +76,9 @@ public class DataCollection {
 
     public void updateItem(int index, String newItem) throws IOException{
         if (type == CollectionType.ARRAYLIST) {
+            if (index < 0 || index >= this.arrayList.size()) {
+                throw new IndexOutOfBoundsException("Index out of bounds for ArrayList");
+            }
             this.arrayList.set(index, newItem);
             FilesHelper.writeToFile("arrayList.txt", this.arrayList.toString());
         } else if (type == CollectionType.SET) {
@@ -99,6 +102,9 @@ public class DataCollection {
 
     public void removeItem(int index) throws IOException {
         if (type == CollectionType.ARRAYLIST) {
+            if (index < 0 || index >= this.arrayList.size()) {
+                throw new IndexOutOfBoundsException("Index out of bounds for ArrayList");
+            }
             this.arrayList.remove(index);
             FilesHelper.writeToFile("arrayList.txt", this.arrayList.toString());
         } else if (type == CollectionType.SET) {

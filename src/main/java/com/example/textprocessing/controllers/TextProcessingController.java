@@ -1,6 +1,6 @@
 package com.example.textprocessing.controllers;
 
-import com.example.textprocessing.services.RegexTextProcessing;
+import com.example.textprocessing.RegexTextProcessing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -60,15 +60,10 @@ public class TextProcessingController {
             warningLabel.setText("");
             highlightResultTextFlow.getChildren().clear();
 
-            String originalText = textTextField.getText();
-            String regex = regexTextField.getText();
-            String replacement = repTextField.getText();
+            String replacedText = regexTextProcessing.replaceMatch(regexTextField.getText(), textTextField.getText(), repTextField.getText());
 
-            Matcher matcher = regexTextProcessing.matcher(regex, originalText);
-
-            if (matcher.find()) {
-                String replacedText = matcher.replaceAll(replacement);
-                resultLabel.setText( replacedText);
+            if (replacedText != null) {
+                resultLabel.setText(replacedText);
             } else {
                 resultLabel.setText("No match found to replace");
             }
@@ -85,36 +80,10 @@ public class TextProcessingController {
             warningLabel.setText("");
             highlightResultTextFlow.getChildren().clear();
 
-            String text = textTextField.getText();
-            String regex = regexTextField.getText();
+            String highlightedText = regexTextProcessing.highlightMatches(regexTextField.getText(), textTextField.getText());
 
-            Matcher matcher = regexTextProcessing.matcher(regex, text);
-            int lastMatchEnd = 0;
-            boolean matchFound = false;
-
-            while (matcher.find()) {
-                matchFound = true;
-
-                if (matcher.start() > lastMatchEnd) {
-                    Text beforeMatch = new Text(text.substring(lastMatchEnd, matcher.start()));
-                    highlightResultTextFlow.getChildren().add(beforeMatch);
-                }
-
-
-                Text match = new Text(text.substring(matcher.start(), matcher.end()));
-                match.setFill(Color.RED);
-                match.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
-                highlightResultTextFlow.getChildren().add(match);
-
-                lastMatchEnd = matcher.end();
-            }
-
-            if (lastMatchEnd < text.length()) {
-                Text afterMatch = new Text(text.substring(lastMatchEnd));
-                highlightResultTextFlow.getChildren().add(afterMatch);
-            }
-
-            if (matchFound) {
+            if (highlightedText != null) {
+                displayHighlightedText(highlightedText);
                 resultLabel.setText("");
             } else {
                 resultLabel.setText("No matches found");
@@ -126,7 +95,19 @@ public class TextProcessingController {
     }
 
 
-
+    private void displayHighlightedText(String highlightedText) {
+        String[] parts = highlightedText.split("\\[\\[\\[|\\]\\]\\]");
+        for (int i = 0; i < parts.length; i++) {
+            Text text = new Text(parts[i]);
+            text.setStyle("-fx-font-size: 18px;-fx-font-weight:bold");
+            text.setFill(Color.GREEN);
+            if (i % 2 == 1) {
+                text.setFill(Color.RED);
+                text.setStyle("-fx-font-size: 19px; -fx-font-weight: bold;");
+            }
+            highlightResultTextFlow.getChildren().add(text);
+        }
+    }
 
     public void validateTextFields(TextField[] fields) throws Exception {
         for (TextField field : fields) {
